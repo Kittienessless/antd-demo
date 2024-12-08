@@ -18,16 +18,13 @@ const RegistrationView = () => {
       try {
         await API.user.register(data);
         setResult("Пользователь успешно создан!");
-        <Alert showIcon message="Success" type="success" closable={true}  />
-
+ 
         setTimeout(() => {
           console.log('success')
           navigate('/ThankfulPage');
 
         }, 2000);
       } catch (e) {
-        <Alert showIcon closable={true} message="Error" type="error" />
-
         if (e instanceof Error) {
           
           setError(e.message);
@@ -41,7 +38,8 @@ const RegistrationView = () => {
     <Flex  vertical align='center' justify='center' gap="middle">
       <Title>Registration</Title>
       <RegisterForm  onSubmit={onSubmit}/>
-     
+      {result && <>{result}</>}
+      {error && <>{error}</>}
     </Flex>
   );
 };

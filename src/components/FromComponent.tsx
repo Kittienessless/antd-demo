@@ -4,7 +4,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input, Flex, Space } from 'antd';
 
 export type LoginFormData = {
-  login: string;
+  email: string;
   password: string;
 }
 
@@ -15,7 +15,7 @@ type FormProps = {
 
 export default function  FromComponent ({onSubmit}: FormProps) {
   const [form] = Form.useForm();
-  const [login, setLogin] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -28,18 +28,18 @@ export default function  FromComponent ({onSubmit}: FormProps) {
       onFinish={onSubmit}
     >
       <Form.Item
-        name="username"
+        name="email"
         rules={[{ required: true, message: 'Please input your Username!' }]}
       >
         <Input 
-          value={login} 
-          onChange={e => setLogin(e.target.value)}   
+          value={email} 
+          onChange={e => setEmail(e.target.value)}   
           style={{
               fontSize: 20,
               height: 40,
             
             }}   
-          prefix={<UserOutlined />} placeholder="Username" />
+          prefix={<UserOutlined />} placeholder="Email" />
       </Form.Item>
       <Form.Item
         name="password"

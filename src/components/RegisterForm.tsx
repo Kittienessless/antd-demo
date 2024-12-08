@@ -8,7 +8,7 @@ import FormItem from 'antd/es/form/FormItem';
 import { useNavigate} from 'react-router-dom';
 
 export type RegisterData = {
-  login: string;
+  name: string;
   password: string;
   description : string,
   email: string
@@ -21,7 +21,7 @@ type FormProps = {
 
 export default function RegisterForm({onSubmit}: FormProps) {
   const [form] = Form.useForm();
-  const [login, setLogin] = useState("");
+  const [name, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [doublePassword, setDoublePassword] = useState("");
   const [description, setDescription] = useState("");
@@ -41,7 +41,7 @@ export default function RegisterForm({onSubmit}: FormProps) {
 
 
         <Form.Item
-          name="username" 
+          name="name" 
           label="NickName"
           rules={[
             {required: true, 
@@ -53,7 +53,7 @@ export default function RegisterForm({onSubmit}: FormProps) {
           ]}
         >
           <Input 
-          value={login} 
+          value={name} 
           onChange={e => setLogin(e.target.value)}
           style={{
             fontSize: 20,

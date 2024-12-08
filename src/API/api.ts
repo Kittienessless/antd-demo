@@ -1,21 +1,21 @@
 
-export const BASE_URL = "http://localhost:3001";
+export const BASE_URL = "http://localhost:5000";
 
 type LoginFormData = {
-  login: string;
+  email: string;
   password: string;
 };
 
 type RegistrationData = {
-  login: string;
+  name: string;
   password: string;
   description : string;
   email: string;
 };
 type PostsData = {
   title: string;
-  authors: string;
-  post_body : string;
+  author: string;
+  text_body : string;
 }
 const errorHandler = async (response: Response) => {
   if (response.status !== 200) {
@@ -28,12 +28,12 @@ export const API = {
   auth: {
     login: async (data: LoginFormData) => {
       const response = await fetch(`${BASE_URL}/auth/login`, {
-        
+        mode: 'no-cors',
         method: "POST",
-       // credentials: "include",
-        headers: {
+    //   credentials: "include",
+       headers: {
           "Content-Type": "application/json",
-          
+         
         },
         body: JSON.stringify(data)
       });
@@ -44,7 +44,7 @@ export const API = {
   user: {
     register: async (data: RegistrationData) => {
       const response = await fetch(`${BASE_URL}/auth/registration`, {
-       
+        mode: 'no-cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json", 
@@ -66,7 +66,7 @@ export const API = {
   posts: {
       createPost: async (data: PostsData) => {
         
-        const response = await fetch(`http://localhost:3001/posts/createPost`, {
+        const response = await fetch(`http://localhost:5000/posts/createPost`, {
           method: "POST",
           
           headers: {
