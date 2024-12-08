@@ -1,4 +1,5 @@
-export const BASE_URL = "http://localhost:3000";
+
+export const BASE_URL = "http://localhost:3001";
 
 type LoginFormData = {
   login: string;
@@ -11,7 +12,11 @@ type RegistrationData = {
   description : string;
   email: string;
 };
-
+type PostsData = {
+  title: string;
+  authors: string;
+  post_body : string;
+}
 const errorHandler = async (response: Response) => {
   if (response.status !== 200) {
     const responseData = await response.json();
@@ -23,7 +28,7 @@ export const API = {
   auth: {
     login: async (data: LoginFormData) => {
       const response = await fetch(`${BASE_URL}/auth/login`, {
-        mode: 'cors', 
+        
         method: "POST",
        // credentials: "include",
         headers: {
@@ -34,18 +39,12 @@ export const API = {
       });
       await errorHandler(response);
     },
-  /*   logout: async () => {
-      const response = await fetch(`${BASE_URL}/auth`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-      await errorHandler(response);
-    }, */
+   
   },
   user: {
     register: async (data: RegistrationData) => {
       const response = await fetch(`${BASE_URL}/auth/registration`, {
-        mode: 'cors', 
+       
         method: "POST",
         headers: {
           "Content-Type": "application/json", 
@@ -64,4 +63,26 @@ export const API = {
     await errorHandler(response);
     return await response.json();
   },
-};
+  posts: {
+      createPost: async (data: PostsData) => {
+        
+        const response = await fetch(`http://localhost:3001/posts/createPost`, {
+          method: "POST",
+          
+          headers: {
+            "Content-Type": "application/json", 
+          },
+          body: JSON.stringify(data)
+        });
+        await errorHandler(response);
+      },
+      getAllPosts: async  () => {
+        const response = await fetch(`${BASE_URL}/posts/PostsList`, {
+          credentials: "include",
+          method: "GET"
+        });
+        await errorHandler(response);
+        return await response.json();
+      },
+    }
+  };

@@ -2,24 +2,22 @@ import { useEffect, useState } from "react";
 import { Card  } from 'antd';
 
 
-export type PostsData = {
+export type PostData = {
   title: string;
-  author: string;
+  authors: string;
   post_body : string;
 }
 export default function PostsComponent() {
-  const [posts, setPosts] = useState<PostsData[]>([]);
+  const [posts, setPosts] = useState<PostData[]>([]);
+  const [authors, setAuthor] = useState("");
+  const [title, setTitle] = useState("");
+  const [post_body, setText] = useState("");
 
-  useEffect(()=>{
-    const fetchPosts = async () =>{
-      
-    } 
-  },[])
-
+  
   return(
     <div>
 
-      <Card title="Post title" bordered={false} style={{ width: 900 }}>
+      <Card title="title" bordered={false} style={{ width: 900 }}>
         <p>Post author</p>
         <p>Post content</p>
       </Card>

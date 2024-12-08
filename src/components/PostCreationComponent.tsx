@@ -1,54 +1,54 @@
 // форма создания постов - только форма
 import React,{ useState} from 'react';
-import { Typography, Button, Form, Input, InputNumber, Flex  } from 'antd';
-const { Title } = Typography;
+import {  Button, Form, Input  } from 'antd';
+
+export type PostsData = {
+  title: string;
+  authors: string;
+  post_body : string
+}
+
+type FormProps = {
+  onSubmit: (data: PostsData) => void;
+}
 
 
-const validateMessages = {
-  required: '${label} is required!',
-  types: {
-    email: '${label} is not a valid email!',
-    number: '${label} is not a valid number!',
-  },
-  number: {
-    range: '${label} must be between ${min} and ${max}',
-  },
-};
-const onFinish = (values: any) => {
-  console.log(values);
-};
-
-const PostCreationComponent: React.FC = () => {
+export default function PostCreationComponent({onSubmit}: FormProps) {
  const [form] = Form.useForm();
+ const [title, setTitle] = useState("");
+  const [authors, setAuthor] = useState("");
+  const [post_body, setText] = useState("");
+  console.log(title, authors, post_body);
   return (
    <div > 
-      <Form 
+      <Form   form={form}   initialValues={{ remember: true }}
+      onFinish={onSubmit}
       layout="vertical"      size="large" 
       style={{ maxWidth: 600 }}
     >
       <Form.Item  name='title' label="Title" rules={[{ required: true }]}>
-        <Input style={{
+        <Input value={title}  onChange={e => setTitle(e.target.value)}  style={{
             fontSize: 25,
             height: 50,
            
           }}  />
       </Form.Item>
-      <Form.Item name='author' label="Author" rules={[{ required: true }]}>
-        <Input style={{
+      <Form.Item name='authors' label="Author" rules={[{ required: true }]}>
+        <Input value={authors} onChange={e => setAuthor(e.target.value)} style={{
             fontSize: 25,
             height: 50,
            
           }}   />
       </Form.Item>
   
-      <Form.Item name='postBody' label="Post" rules={[{ required: true }]}>
-        <Input.TextArea  style={{
+      <Form.Item name='post_body' label="Post" rules={[{ required: true }]}>
+        <Input.TextArea value={post_body} onChange={e => setText(e.target.value)} style={{
             fontSize: 25,
             height: 50,
            
           }}  />
       </Form.Item>
-      <Form.Item >
+      <Form.Item>
         <Button size='large'  type="primary" htmlType="submit">
           Create
         </Button>
@@ -59,4 +59,3 @@ const PostCreationComponent: React.FC = () => {
   );
 };
 
-export default PostCreationComponent;
