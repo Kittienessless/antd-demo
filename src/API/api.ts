@@ -7,10 +7,10 @@ type LoginFormData = {
 };
 
 type RegistrationData = {
-  name: string;
-  password: string;
-  description : string;
-  email: string;
+  email: string,
+  name: string,
+  password: string,
+  description : string
 };
 type PostsData = {
   title: string;
@@ -28,9 +28,8 @@ export const API = {
   auth: {
     login: async (data: LoginFormData) => {
       const response = await fetch(`${BASE_URL}/auth/login`, {
-        mode: 'no-cors',
-        method: "POST",
-    //   credentials: "include",
+         method: "POST",
+         //credentials: "include",
        headers: {
           "Content-Type": "application/json",
          
@@ -44,8 +43,7 @@ export const API = {
   user: {
     register: async (data: RegistrationData) => {
       const response = await fetch(`${BASE_URL}/auth/registration`, {
-        mode: 'no-cors',
-        method: "POST",
+         method: "POST",
         headers: {
           "Content-Type": "application/json", 
         },

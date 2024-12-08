@@ -1,17 +1,15 @@
-import React,  {FormEvent, useState} from 'react';
+import React,  {  useState} from 'react';
 import { LockOutlined, UserOutlined, EditOutlined, MailOutlined } from '@ant-design/icons';
-import { Button,  Form, Input,  Typography, Space, Select, DatePicker} from 'antd';
-import type { DatePickerProps } from 'antd';
-import { useForm } from 'antd/es/form/Form';
-import moment from 'moment';
-import FormItem from 'antd/es/form/FormItem';
+import { Button,  Form, Input,    Space } from 'antd';
+ import { useForm } from 'antd/es/form/Form';
 import { useNavigate} from 'react-router-dom';
 
 export type RegisterData = {
-  name: string;
-  password: string;
-  description : string,
-  email: string
+  email: string,
+  name: string,
+  password: string,
+  description : string
+  
 }
 
 
@@ -27,10 +25,10 @@ export default function RegisterForm({onSubmit}: FormProps) {
   const [description, setDescription] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
-
-  return (
+   return (
     <div  > 
       <Space></Space>
+      
       <Form   labelCol={{span: 10}} wrapperCol={{span: 14}} 
         form={form} 
         name="register"

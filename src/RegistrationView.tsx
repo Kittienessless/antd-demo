@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import RegisterForm, { RegisterData } from "./components/RegisterForm";
 import { API } from "./API/api";
-import { Typography, Flex, Alert } from 'antd';
+import { Typography, Flex } from 'antd';
 const { Title } = Typography;
 
 const RegistrationView = () => {
@@ -11,22 +11,18 @@ const RegistrationView = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data: RegisterData) => {
-    // fetch
-    const registrationRequest = async () => {
+     const registrationRequest = async () => {
       setResult("");
       setError("");
       try {
         await API.user.register(data);
         setResult("Пользователь успешно создан!");
- 
         setTimeout(() => {
           console.log('success')
           navigate('/ThankfulPage');
-
         }, 2000);
       } catch (e) {
         if (e instanceof Error) {
-          
           setError(e.message);
         }
       }
