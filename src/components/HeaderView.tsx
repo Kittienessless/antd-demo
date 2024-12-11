@@ -1,16 +1,8 @@
-import {
-  Route,
-  Routes,
-  useNavigate
-} from 'react-router-dom';
-import { ScriptReferenceHost } from "typescript";
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button,  Form, Input,  Typography, Space, Select, Flex, Layout} from 'antd';
+
+import {  Layout} from 'antd';
 import HeaderComponents from "./HeaderComponents";
-import ContentPage from './ContentPage';
-const { Title } = Typography;
-const { Option } = Select;
-const { Header, Footer, Content } = Layout;
+
+const { Header  } = Layout;
 
 
 

@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 
 import { Typography } from 'antd';
 import PostCreationComponent, { PostsData } from './PostCreationComponent'
-import { Button, Checkbox, Form, Input, Flex } from 'antd';
+import { Flex } from 'antd';
 import { API } from '../API/api';
 const { Title } = Typography;
 const PostsCreationPage: React.FC = () => {
@@ -21,7 +21,7 @@ const PostsCreationPage: React.FC = () => {
         setResult("Пост успешно создан!");
         setTimeout(() => {
           console.log('success')
-          navigate('/ThankfulPage');
+          navigate('/PostPage');
 
         }, 2000);
       } catch (e) {

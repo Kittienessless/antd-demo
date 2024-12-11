@@ -1,52 +1,72 @@
-import React,{ useState} from 'react';
-import { Typography } from 'antd';
+import React,{ useState, useEffect} from 'react';
+import { API } from "../API/api";
 
-import { Button, Checkbox, Form, Input, Flex, Descriptions  } from 'antd';
-import type { DescriptionsProps } from 'antd';
+import {  Button, Card   } from 'antd';
+import { CookiesProvider, useCookies } from 'react-cookie'
 
-const items: DescriptionsProps['items'] = [
-  {
-    key: '1',
-    label: 'UserName',
-    children: 'Zhou Maomao',
-  },
-  {
-    key: '2',
-    label: 'Telephone',
-    children: '1810000000',
-  },
-  {
-    key: '3',
-    label: 'Live',
-    children: 'Hangzhou, Zhejiang',
-  },
-  {
-    key: '4',
-    label: 'Remark',
-    children: 'empty',
-  },
-  {
-    key: '5',
-    label: 'Address',
-    children: 'No. 18, Wantang Road, Xihu District, Hangzhou, Zhejiang, China',
-  },
-];
-const { Title } = Typography;
-const ProfileComponent: React.FC = () => {
+
+ const ProfileComponent: React.FC = () => {
+  const [isLogged, setLogged] = useState(false);
+  const [error, setError] = useState('');
+  const [userInfo, setUserInfo] = useState(
+    {id: '', name: "", email: '', description : ""}
+   ); 
+  const [result, setResult] = useState("");
+
+  
+  useEffect(() => {
+    const fetchUserData = async () => {
+        setLogged(false);
+        setResult("");
+        setError("");
+      try {
+        
+        const response = await API.user.getCurrentUser()
+        setLogged(true);
+
+        setUserInfo(response);
+        setError('');
+      } catch (e) {
+        if (e instanceof Error) {
+          setError(e.message);
+        }
+      } finally {
+        setLogged(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  /* const buttonHelper = () => {
+    const logoutRequest = async () => {
+      try {
+        await API.auth.logout();
+        setLogged(false);
+        setResult("");
+      } catch (e) {
+        if (e instanceof Error) {
+          setError(e.message);
+        }
+      }
+    };
+    logoutRequest();
+  }
+   */
 
   return (
-   <div>
-     <Title style={{
-       marginLeft: '100px',
-       marginTop: '50px'
+     <div style={{margin: 50, padding: 10,   borderRadius: 10, maxHeight:300 }}>
+      <p> ID:  {userInfo.id}</p>
+      <p> NAME: {userInfo.name}</p>
+      <p>EMAIL:  {userInfo.email}</p>
+      <p> DESCRIPTION: {userInfo.description}</p>
+      <div></div>
+ 
+    </div>
+    
         
-        }}>Profile</Title>
-     <Descriptions title="User Info" items={items} style={{
-       margin: '100px'
-        
-        }}></Descriptions>
-   </div>
-  );
+       
+   );
 };
 
 export default ProfileComponent;

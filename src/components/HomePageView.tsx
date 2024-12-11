@@ -1,8 +1,4 @@
-import {
-  Route,
-  Routes,
-  useNavigate
-} from 'react-router-dom';
+
 import {  Flex, Layout} from 'antd';
 import ContentPage from './ContentPage';
 const {  Content } = Layout;

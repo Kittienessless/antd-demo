@@ -1,43 +1,53 @@
-// страница постов, 
-// вызов списка постов, 
-// пагинация постов
-// крутилки
-import React,{ useState} from 'react';
+ 
+import React,{ useState, useEffect} from 'react';
 import { Typography } from 'antd';
-import {useAsyncError, useNavigate} from 'react-router-dom';
-import { LikeOutlined, CommentOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Modal, Input, Flex, List, Card, Switch  } from 'antd';
-import { title } from 'process';
-import Item from 'antd/es/list/Item';
-import ModalPostItem from './ModalPostItem';
+  import {  List, Card   } from 'antd';
+ import { API } from "../API/api";
+
 const { Title } = Typography;
-const ProfileComponent: React.FC = () => {
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [open, setOpen] = useState(false);
+export type RegisterData = {
+  title: string;
+  author: string;
+  text_body : string;
+  
+}
+const PostPage: React.FC = () => {
+
+  
   const [posts, setPosts] = useState([
-    {id: '1', title: '1111', author: '11111', text_body: '11111'},
-    {id: '2', title: '22222', author: '22222', text_body: '22222'},
-    {id: '2', title: '22222', author: '22222', text_body: '22222'},
-    {id: '2', title: '22222', author: '22222', text_body: '22222'},
-    {id: '2', title: '22222', author: '22222', text_body: '22222'},
-    {id: '2', title: '22222', author: '22222', text_body: '22222'},
+    {id: '', title: '', author: '', text_body: ''},
 
-  ]);
-  const [comment, setComment] = useState('');
 
-  function LikeHelper() {
-    
-  }
+  ]); 
 
-  const actions: React.ReactNode[] = [
-    <LikeOutlined key="like" onClick={()=>{ }}   />,
-    <CommentOutlined  key="comment" onClick={() => setOpen(true)}  />,
-  ];
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
+  useEffect(() => {
+    const fetchDataForPosts = async () => {
+      try {
+        const response = await API.posts.getAllPosts()
+       
+        setPosts(response);
+        setError('');
+      } catch (e) {
+        if (e instanceof Error) {
+          setError(e.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDataForPosts();
+  }, []);
+
+
+ 
  
   return (
   <div>
+    
     <Title style={{
        marginLeft: '100px',
        marginTop: '50px',
@@ -61,8 +71,8 @@ const ProfileComponent: React.FC = () => {
           <List.Item>
             
               <Card style={{width: '800px'}}  
-              hoverable  loading={loading} actions={actions}
-              onClick={() => setOpen(true)}  key={posts.id}
+              hoverable  
+                key={posts.id}
               > 
               <Card.Meta
                 title={posts.title}
@@ -80,17 +90,7 @@ const ProfileComponent: React.FC = () => {
         )}
         />
         <div>
-        <Modal
-                  title=" "
-                  centered
-                  open={open}
-                  onOk={() => setOpen(false)}
-                  onCancel={() => setOpen(false)}
-                  width={800}
-                > 
-                
-                 
-                </Modal>
+         
 
         </div>
        
@@ -99,4 +99,4 @@ const ProfileComponent: React.FC = () => {
 );
 }
 
-export default ProfileComponent;
+export default PostPage;

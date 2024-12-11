@@ -14,8 +14,7 @@ type RegistrationData = {
 };
 type PostsData = {
   title: string;
-  author: string;
-  text_body : string;
+   text_body : string;
 }
 const errorHandler = async (response: Response) => {
   if (response.status !== 200) {
@@ -29,7 +28,7 @@ export const API = {
     login: async (data: LoginFormData) => {
       const response = await fetch(`${BASE_URL}/auth/login`, {
          method: "POST",
-         //credentials: "include",
+         credentials: "include",
        headers: {
           "Content-Type": "application/json",
          
@@ -38,8 +37,15 @@ export const API = {
       });
       await errorHandler(response);
     },
-   
+    logout: async () => {
+      const response = await fetch(`${BASE_URL}/auth/logout`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      await errorHandler(response);
+    },
   },
+  
   user: {
     register: async (data: RegistrationData) => {
       const response = await fetch(`${BASE_URL}/auth/registration`, {
@@ -51,22 +57,23 @@ export const API = {
       });
       await errorHandler(response);
     },
-  
+    getCurrentUser: async () => {
+        const response = await fetch(`${BASE_URL}/auth/getOneUserByPK`, {
+          credentials: "include",
+          method: "GET"
+        });
+        await errorHandler(response);
+        return await response.json();
+      },
   },
-  getCurrentUser: async () => {
-    const response = await fetch(`${BASE_URL}/user`, {
-      credentials: "include",
-      method: "GET"
-    });
-    await errorHandler(response);
-    return await response.json();
-  },
+ 
   posts: {
       createPost: async (data: PostsData) => {
         
         const response = await fetch(`http://localhost:5000/posts/createPost`, {
           method: "POST",
-          
+          credentials: "include",
+
           headers: {
             "Content-Type": "application/json", 
           },
@@ -76,8 +83,7 @@ export const API = {
       },
       getAllPosts: async  () => {
         const response = await fetch(`${BASE_URL}/posts/PostsList`, {
-          credentials: "include",
-          method: "GET"
+           method: "GET"
         });
         await errorHandler(response);
         return await response.json();

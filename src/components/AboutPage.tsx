@@ -1,13 +1,6 @@
-import {
-  Route,
-  Routes,
-  useNavigate
-} from 'react-router-dom';
-import { ScriptReferenceHost } from "typescript";
-import { ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
-import { Button,  Form, Input,  Typography, Space, Select, Flex, Layout, Image } from 'antd';
-import HeaderComponents from "./HeaderComponents";
-import ContentPage from './ContentPage';
+
+import {  Typography, Space, Select, Flex, Layout } from 'antd';
+
 const { Title } = Typography;
 const { Option } = Select;
 const { Header, Footer, Content } = Layout;
@@ -19,7 +12,6 @@ const layoutStyle = {
 
 
 export default function AboutPage() {
-  const navigate = useNavigate();
 
   return(
     <Flex  vertical  gap='small'  justify='center' align='center' >

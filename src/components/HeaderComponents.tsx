@@ -1,10 +1,9 @@
-import React, { useState} from 'react';
+import React from 'react';
 import {
-  Route,
-  Routes,
+  
   useNavigate
 } from 'react-router-dom';
-import { AppstoreOutlined, HolderOutlined, HomeOutlined, MailOutlined, PlusCircleOutlined, ReadOutlined, MoonOutlined, UserOutlined } from '@ant-design/icons';
+import {HomeOutlined,  PlusCircleOutlined, ReadOutlined, MoonOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu , Flex} from 'antd';
 type MenuItem = Required<MenuProps>['items'][number];
@@ -20,11 +19,6 @@ const items: MenuItem[] = [
     icon: < HomeOutlined/>
   },
   {
-    label: 'User Profile',
-    key: '/Profile',
-    icon: < UserOutlined/>
-  },
-  {
     label:'Posts',
     key: '/Posts',
     icon: < ReadOutlined/>
@@ -37,11 +31,12 @@ const items: MenuItem[] = [
 
   },
   {
-    label: 'About',
-    key: '/AboutPage',
-    icon: <MoonOutlined />
+    label: 'User profile',
+    key: '/Profile',
+    icon: <UserOutlined />
 
   },
+
 ];
 
 const HeaderComponents: React.FC = () => {

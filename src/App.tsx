@@ -10,6 +10,8 @@ import HeaderView from './components/HeaderView';
 import FooterView from './components/FooterView';
 import ThankfulPage from './components/ThankfulPage';
 import AboutPage from './components/AboutPage';
+import PostPage from './components/PostPage';
+
 import {
   Route,
   Routes
@@ -17,6 +19,7 @@ import {
 
 
 function App() {
+  
   return (
     <div >
       <HeaderView/>
@@ -30,6 +33,7 @@ function App() {
           <Route path='/Authors' element={<PostsCreationPage/>} /> 
           <Route path='/ThankfulPage' element={<ThankfulPage/>} /> 
           <Route path='/AboutPage' element={<AboutPage/>} /> 
+          <Route path='/PostPage' element={<PostPage/>} /> 
 
         </Route>
       </Routes>
